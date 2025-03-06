@@ -25,7 +25,7 @@ console.error = (msg) => {
         'Warning: An update to Main inside a test was not wrapped in act'
       )
   ) {
-    return () => {};
+    return () => { };
   } else return console.error;
 };
 
@@ -84,95 +84,95 @@ describe('💡 Part 1: 항공권 목록 필터링', () => {
 
 // Part 2 테스트는 아래의 주석을 해제 하세요.
 
-// describe('💡 Part 2: AJAX 요청', () => {
-//   describe('🧩 Side Effect는 useEffect에서 다뤄야 합니다', () => {
-//     test('검색 조건이 바뀔 때마다, FlightDataApi의 getFlight를 검색 조건과 함께 요청해야 합니다', async () => {
-//       const getFlightSpy = jest.spyOn(Api, 'getFlight').mockResolvedValue([]);
+describe('💡 Part 2: AJAX 요청', () => {
+  describe('🧩 Side Effect는 useEffect에서 다뤄야 합니다', () => {
+    test('검색 조건이 바뀔 때마다, FlightDataApi의 getFlight를 검색 조건과 함께 요청해야 합니다', async () => {
+      const getFlightSpy = jest.spyOn(Api, 'getFlight').mockResolvedValue([]);
 
-//       const { getByRole, container } = render(<Main />);
-//       const btn = getByRole('button', { name: '검색' });
-//       const input = container.querySelector('#input-destination');
+      const { getByRole, container } = render(<Main />);
+      const btn = getByRole('button', { name: '검색' });
+      const input = container.querySelector('#input-destination');
 
-//       fireEvent.change(input, { target: { value: 'CJU' } });
-//       fireEvent.click(btn);
+      fireEvent.change(input, { target: { value: 'CJU' } });
+      fireEvent.click(btn);
 
-//       await waitFor(() => {
-//         expect(getFlightSpy).toHaveBeenCalledWith({
-//           departure: 'ICN',
-//           destination: 'CJU',
-//         });
-//       });
+      await waitFor(() => {
+        expect(getFlightSpy).toHaveBeenCalledWith({
+          departure: 'ICN',
+          destination: 'CJU',
+        });
+      });
 
-//       getFlightSpy.mockRestore();
-//     });
+      getFlightSpy.mockRestore();
+    });
 
-//     test('getFlight의 결과를 받아, flightList 상태를 업데이트해야 합니다', async () => {
-//       const { getByRole, queryAllByText, container } = render(<Main />);
-//       const btn = getByRole('button', { name: '검색' });
-//       const input = container.querySelector('#input-destination');
+    test('getFlight의 결과를 받아, flightList 상태를 업데이트해야 합니다', async () => {
+      const { getByRole, queryAllByText, container } = render(<Main />);
+      const btn = getByRole('button', { name: '검색' });
+      const input = container.querySelector('#input-destination');
 
-//       fireEvent.change(input, { target: { value: 'CJU' } });
-//       fireEvent.click(btn);
+      fireEvent.change(input, { target: { value: 'CJU' } });
+      fireEvent.click(btn);
 
-//       await waitFor(() => {
-//         expect(queryAllByText('🛬 CJU').length).toBe(5); // 도착지가 CJU이면, 결과가 다섯개입니다
+      await waitFor(() => {
+        expect(queryAllByText('🛬 CJU').length).toBe(5); // 도착지가 CJU이면, 결과가 다섯개입니다
 
-//         // 다른 도착지는 화면에 표시되지 않습니다
-//         expect(queryAllByText('🛬 BKK').length).toBe(0);
-//         expect(queryAllByText('🛬 PUS').length).toBe(0);
-//       });
-//     });
+        // 다른 도착지는 화면에 표시되지 않습니다
+        expect(queryAllByText('🛬 BKK').length).toBe(0);
+        expect(queryAllByText('🛬 PUS').length).toBe(0);
+      });
+    });
 
-//     test('더이상, 컴포넌트 내 필터 함수 `filterByCondition`를 사용하지 않습니다', () => {
-//       // HINT: 주석 처리하지 말고, 해당 내용을 지워야 테스트에 통과합니다
-//       expect(Main.toString().includes('filterByCondition')).toBe(false);
-//     });
+    test('더이상, 컴포넌트 내 필터 함수 `filterByCondition`를 사용하지 않습니다', () => {
+      // HINT: 주석 처리하지 말고, 해당 내용을 지워야 테스트에 통과합니다
+      expect(Main.toString().includes('filterByCondition')).toBe(false);
+    });
 
-//     test('더이상, 하드코딩된 flightList JSON을 사용하지 않습니다 (초기값은 빈 배열로 둡니다)', () => {
-//       // HINT: 주석 처리하지 말고, 해당 내용을 지워야 테스트에 통과합니다
-//       const file = readFileSync(__dirname + '/../pages/index.js').toString();
-//       expect(file.includes("import json from '../resource/flightList'")).toBe(
-//         false
-//       );
-//     });
+    test('더이상, 하드코딩된 flightList JSON을 사용하지 않습니다 (초기값은 빈 배열로 둡니다)', () => {
+      // HINT: 주석 처리하지 말고, 해당 내용을 지워야 테스트에 통과합니다
+      const file = readFileSync(__dirname + '/../pages/index.js').toString();
+      expect(file.includes("import json from '../resource/flightList'")).toBe(
+        false
+      );
+    });
 
-//     test('getFlight 요청이 다소 느리므로, 로딩 상태에 따라 LoadingIndicator 컴포넌트를 표시해야 합니다', async () => {
-//       const { getByRole, getByAltText, container } = render(<Main />);
-//       const btn = getByRole('button', { name: '검색' });
-//       const input = container.querySelector('#input-destination');
+    test('getFlight 요청이 다소 느리므로, 로딩 상태에 따라 LoadingIndicator 컴포넌트를 표시해야 합니다', async () => {
+      const { getByRole, getByAltText, container } = render(<Main />);
+      const btn = getByRole('button', { name: '검색' });
+      const input = container.querySelector('#input-destination');
 
-//       fireEvent.change(input, { target: { value: 'CJU' } });
-//       fireEvent.click(btn);
+      fireEvent.change(input, { target: { value: 'CJU' } });
+      fireEvent.click(btn);
 
-//       expect(getByAltText('now loading...')).not.toBeNull();
-//       await waitForElementToBeRemoved(() => getByAltText('now loading...'));
-//     });
-//   });
+      expect(getByAltText('now loading...')).not.toBeNull();
+      await waitForElementToBeRemoved(() => getByAltText('now loading...'));
+    });
+  });
 
-//   describe('🧩 FlightDataApi에서 기존 구현 대신, REST API를 호출하도록 바꿉니다', () => {
-//     test('검색 조건과 함께 Airline 서버에서 항공편 정보를 요청(fetch)합니다', (done) => {
-//       const result = [
-//         {
-//           uuid: 'af6fa55c-da65-47dd-af23-578fdba40bod',
-//           departure: 'ICN',
-//           destination: 'CJU',
-//           departure_times: '2024-12-02T12:00:00',
-//           arrival_times: '2024-12-03T12:00:00',
-//         },
-//       ];
+  describe('🧩 FlightDataApi에서 기존 구현 대신, REST API를 호출하도록 바꿉니다', () => {
+    test('검색 조건과 함께 Airline 서버에서 항공편 정보를 요청(fetch)합니다', (done) => {
+      const result = [
+        {
+          uuid: 'af6fa55c-da65-47dd-af23-578fdba40bod',
+          departure: 'ICN',
+          destination: 'CJU',
+          departure_times: '2024-12-02T12:00:00',
+          arrival_times: '2024-12-03T12:00:00',
+        },
+      ];
 
-//       const scope = nock('http://localhost:4999')
-//         .persist()
-//         .get('/flight')
-//         .reply(200, result);
+      const scope = nock('http://localhost:4999')
+        .persist()
+        .get('/flight')
+        .reply(200, result);
 
-//       Api.getFlight({ departure: 'ICN', destination: 'CJU' }).then((json) => {
-//         expect(json).toEqual(result);
-//         const ajaxCallCount = scope.interceptors[0].interceptionCounter;
-//         expect(ajaxCallCount).toEqual(1); // ajax call이 1회 발생
-//         expect(scope.interceptors[0].statusCode).toEqual(200);
-//         done();
-//       });
-//     });
-//   });
-// });
+      Api.getFlight({ departure: 'ICN', destination: 'CJU' }).then((json) => {
+        expect(json).toEqual(result);
+        const ajaxCallCount = scope.interceptors[0].interceptionCounter;
+        expect(ajaxCallCount).toEqual(1); // ajax call이 1회 발생
+        expect(scope.interceptors[0].statusCode).toEqual(200);
+        done();
+      });
+    });
+  });
+});
