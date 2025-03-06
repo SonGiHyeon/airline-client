@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-function Search() {
+function Search({ onSearch }) {
   const [textDestination, setTextDestination] = useState('');
+
+  // console.log(textDestination);
 
   const handleChange = (e) => {
     setTextDestination(e.target.value.toUpperCase());
@@ -14,8 +16,12 @@ function Search() {
   };
 
   const handleSearchClick = () => {
-    console.log('검색 버튼을 누르거나, 엔터를 치면 search 함수가 실행됩니다');
+    // console.log('검색 버튼을 누르거나, 엔터를 치면 search 함수가 실행됩니다');
 
+    onSearch({
+      departure: 'ICN',
+      destination: textDestination,
+    });
     // TODO:
   };
 
